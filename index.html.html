@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROLYDOK CORPORATION – Commerce, Logistique & Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== VARIABLES & RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bleu:    #1A3F72;
+      --orange:  #F4A622;
+      --blanc:   #FFFFFF;
+      --gris-bg: #F5F6F8;
+      --gris-tx: #4A4A4A;
+      --ombre:   0 4px 20px rgba(0,0,0,0.10);
+      --radius:  12px;
+      --trans:   0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--gris-tx);
+      background: var(--blanc);
+      line-height: 1.65;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 72px;
+      background: var(--bleu);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: #fff;
+      padding: 3px;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text strong {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--blanc);
+      letter-spacing: 1px;
+    }
+
+    .nav-logo-text span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      color: var(--orange);
+      letter-spacing: 2px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: color var(--trans);
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+
+    .nav-cta {
+      background: var(--orange) !important;
+      color: var(--bleu) !important;
+      padding: 9px 22px !important;
+      border-radius: 999px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.3px !important;
+      transition: opacity var(--trans) !important;
+    }
+    .nav-cta:hover { opacity: 0.88 !important; color: var(--bleu) !important; }
+
+    /* Hamburger mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2.5px;
+      background: var(--blanc);
+      border-radius: 2px;
+      transition: var(--trans);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--bleu);
+      padding: 24px 32px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      transition: color var(--trans);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--orange); }
+
+    /* ===== HÉROS ===== */
+    #accueil {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      background-image: linear-gradient(160deg, #0d2550 0%, #1A3F72 50%, #1e5a9e 100%);
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #accueil::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(10,25,60,0.82) 0%,
+        rgba(26,63,114,0.72) 50%,
+        rgba(10,25,60,0.88) 100%
+      );
+      z-index: 0;
+    }
+    #accueil::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, rgba(10,25,60,0.6), transparent);
+      z-index: 1;
+    }
+
+    .hero-logo {
+      width: 120px; height: 120px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.12);
+      padding: 10px;
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(244,166,34,0.18);
+      border: 1px solid rgba(244,166,34,0.5);
+      color: var(--orange);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      animation: fadeDown 0.9s ease both;
+    }
+
+    #accueil h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(32px, 5vw, 58px);
+      color: var(--blanc);
+      line-height: 1.1;
+      max-width: 780px;
+      margin-bottom: 20px;
+      animation: fadeDown 1s ease both;
+    }
+
+    #accueil h1 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 540px;
+      margin-bottom: 40px;
+      animation: fadeDown 1.1s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeDown 1.2s ease both;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--bleu);
+      padding: 14px 36px;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--trans), opacity var(--trans);
+      display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.92; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--blanc);
+      padding: 13px 34px;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: border-color var(--trans), color var(--trans);
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* Statistiques héros */
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 56px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeUp 1.4s ease both;
+    }
+
+    .stat-item {
+      padding: 20px 36px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.14);
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 30px;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* ===== SECTIONS COMMUNES ===== */
+    section { padding: 80px 24px; }
+    section:nth-child(even) { background: var(--gris-bg); }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(244,166,34,0.15);
+      color: var(--orange);
+      border: 1px solid rgba(244,166,34,0.4);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 16px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .section-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(26px, 3.5vw, 38px);
+      color: var(--bleu);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .section-header p {
+      color: #666;
+      font-size: 15px;
+    }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--blanc); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--blanc);
+      border: 1.5px solid #e8ecf0;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card p {
+      flex: 1;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--trans);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26,63,114,0.12);
+      border-color: rgba(244,166,34,0.35);
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      background: var(--gris-bg);
+    }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(26,63,114,0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 26px;
+    }
+
+    .service-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--bleu);
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      font-size: 13.5px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .service-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--orange);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      transition: gap var(--trans);
+    }
+    .service-btn:hover { gap: 10px; }
+
+    /* ===== À PROPOS ===== */
+    #apropos { background: var(--gris-bg); }
+
+    .apropos-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .apropos-logo-big {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .apropos-logo-big img {
+      width: 200px;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .valeurs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .valeur-badge {
+      background: var(--bleu);
+      color: var(--blanc);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+
+    .apropos-content h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(24px, 3vw, 34px);
+      color: var(--bleu);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .apropos-content h2 span { color: var(--orange); }
+
+    .apropos-content p {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .chiffres-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .chiffre-item {
+      background: var(--blanc);
+      border-radius: 10px;
+      padding: 18px;
+      border-left: 4px solid var(--orange);
+    }
+
+    .chiffre-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--bleu);
+    }
+
+    .chiffre-lbl {
+      font-size: 12px;
+      color: #888;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* ===== FORMULAIRE ===== */
+    #formulaire { background: var(--blanc); }
+
+    .form-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--blanc);
+      border-radius: 16px;
+      box-shadow: var(--ombre);
+      border: 1.5px solid #e8ecf0;
+      padding: 44px 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--bleu);
+      margin-bottom: 6px;
+      letter-spacing: 0.4px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #dde2ea;
+      border-radius: 8px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      color: var(--gris-tx);
+      background: var(--blanc);
+      transition: border-color var(--trans), box-shadow var(--trans);
+      outline: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(244,166,34,0.15);
+    }
+
+    .form-group textarea { height: 120px; resize: vertical; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--bleu);
+      color: var(--blanc);
+      border: none;
+      padding: 15px;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background var(--trans), transform var(--trans);
+      margin-top: 8px;
+    }
+
+    .form-submit:hover { background: #0d2550; transform: translateY(-1px); }
+
+    /* Message succès */
+    .success-msg {
+      display: none;
+      background: rgba(26,63,114,0.06);
+      border: 1.5px solid var(--bleu);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .success-msg h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--bleu);
+      margin-bottom: 6px;
+    }
+
+    .success-msg p { font-size: 14px; color: #555; }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--gris-bg); }
+
+    .contact-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .contact-info h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--bleu);
+      margin-bottom: 20px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid #e0e4ea;
+    }
+    .contact-row:last-child { border-bottom: none; }
+
+    .contact-icon {
+      width: 42px; height: 42px;
+      background: var(--bleu);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-detail strong {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+    }
+
+    .contact-detail a, .contact-detail span {
+      font-size: 14px;
+      color: var(--bleu);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--trans);
+    }
+
+    .contact-detail a:hover { color: var(--orange); }
+
+    .contact-map {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #e0e4ea;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      border: none;
+      display: block;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0d2550;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+    }
+
+    footer strong { color: var(--orange); }
+
+    /* ===== WHATSAPP FLOATING ===== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+      z-index: 999;
+      text-decoration: none;
+      transition: transform var(--trans);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .whatsapp-float:hover { transform: scale(1.1); animation: none; }
+
+    .whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 6px 32px rgba(37,211,102,0.75); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+
+      .hero-stats {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.14); }
+      .stat-item:last-child { border-bottom: none; }
+
+      .apropos-inner { grid-template-columns: 1fr; }
+      .apropos-logo-big { order: -1; }
+
+      .form-wrapper { padding: 28px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .contact-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav>
+  <a href="#accueil" class="nav-logo">
+    <img src="" alt="Rolydok Logo" />
+    <div class="nav-logo-text">
+      <strong>ROLYDOK</strong>
+      <span>CORPORATION</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#formulaire" class="nav-cta">Demander un service</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#accueil"   onclick="closeMenu()">Accueil</a>
+  <a href="#services"  onclick="closeMenu()">Services</a>
+  <a href="#apropos"   onclick="closeMenu()">À propos</a>
+  <a href="#formulaire" onclick="closeMenu()">Demander un service</a>
+  <a href="#contact"   onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- ========== HÉROS ========== -->
+<section id="accueil">
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
+  <img class="hero-logo"
+       src=""
+       alt="Rolydok Corporation Logo" />
+
+  <div class="hero-badge">🌍 VOTRE PARTENAIRE GLOBAL</div>
+
+  <h1>Commerce, Logistique &amp;<br /><em>Services Financiers</em></h1>
+
+  <p class="hero-sub">
+    ROLYDOK CORPORATION vous accompagne dans tous vos projets : import-export,
+    tourisme, visas, échange de devises et bien plus.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#formulaire" class="btn-primary">Solliciter une prestation</a>
+    <a href="#services"   class="btn-outline">Nos services</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">8+</div>
+      <div class="stat-lbl">Domaines</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-lbl">Clients satisfaits</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-lbl">Années d'exp.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-lbl">Disponibilité</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section id="services">
+  <div class="section-header">
+    <span class="section-tag">NOS ACTIVITÉS</span>
+    <h2>Des solutions pour chaque besoin</h2>
+    <p>De l'importation à la billetterie, nous couvrons l'ensemble de la chaîne de valeur commerciale et logistique.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80"
+           alt="Commerce général"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">🏪</div>
+      <h3>Commerce général</h3>
+      <p>Négoce, distribution et approvisionnement en produits divers adaptés à vos besoins professionnels.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&q=80"
+           alt="Import Export"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">📦</div>
+      <h3>Importation & Exportation</h3>
+      <p>Gestion complète de vos flux import-export : démarches douanières, transit et livraison.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=600&q=80"
+           alt="Logistique"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">🚢</div>
+      <h3>Logistique</h3>
+      <p>Transport aérien, maritime et routier, entreposage, gestion de stock et traçabilité des marchandises.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80"
+           alt="Tourisme"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">✈️</div>
+      <h3>Tourisme & Visa</h3>
+      <p>Organisation de voyages, obtention de visas, billets d'avion et séjours clés en main dans le monde entier.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80"
+           alt="Finance"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">💱</div>
+      <h3>Échange de devises & Finance</h3>
+      <p>Change de monnaies, services financiers et solutions de paiement rapides et sécurisées.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"
+           alt="Informatique"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">💻</div>
+      <h3>Produits IT & Électronique</h3>
+      <p>Approvisionnement en matériel informatique, accessoires électroniques et diverses marchandises technologiques.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
+           alt="Paiement"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">💳</div>
+      <h3>Systèmes de paiement</h3>
+      <p>Solutions de paiement électronique, mobile money et transferts internationaux pour entreprises.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <img class="service-img"
+           src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600&q=80"
+           alt="Rolydok China Business"
+           onerror="this.style.display='none'" />
+      <div class="service-icon">🇨🇳</div>
+      <h3>Approvisionnement</h3>
+      <p>Sourcing de produits, gestion des fournisseurs et livraison directe à votre porte ou entrepôt.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+    <div class="service-card">
+      <div style="position:relative;width:100%;height:160px;border-radius:8px;overflow:hidden;margin-bottom:18px;">
+        <img
+          src="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=600&q=80"
+          alt="Chine - ROLYDOK China Business"
+          style="width:100%;height:100%;object-fit:cover;"
+          onerror="this.src='https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600&q=80'"
+        />
+        <div style="position:absolute;inset:0;background:rgba(10,25,60,0.52);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;">
+          <div style="font-family:Montserrat,sans-serif;font-weight:900;font-size:17px;color:#fff;letter-spacing:1px;line-height:1.15;text-shadow:0 2px 8px rgba(0,0,0,0.7);">ROLYDOK<br/>CHINA BUSINESS</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.9);margin-top:6px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,0.7);">nous sommes désormais ouverts en chine aussi</div>
+        </div>
+      </div>
+      <div class="service-icon">🇨🇳</div>
+      <h3>Rolydok China Business</h3>
+      <p>Import-export, sourcing et partenariats commerciaux directs depuis la Chine pour vos besoins professionnels.</p>
+      <button class="service-btn" onclick="document.getElementById('formulaire').scrollIntoView({behavior:'smooth'})">
+        Solliciter ce service →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== À PROPOS ========== -->
+<section id="apropos">
+  <div class="apropos-inner">
+
+    <div class="apropos-logo-big">
+      <img src=""
+           alt="Rolydok Corporation" />
+      <div class="valeurs">
+        <span class="valeur-badge">Fiabilité</span>
+        <span class="valeur-badge">Excellence</span>
+        <span class="valeur-badge">Innovation</span>
+        <span class="valeur-badge">Proximité</span>
+        <span class="valeur-badge">Intégrité</span>
+      </div>
+    </div>
+
+    <div class="apropos-content">
+      <span class="section-tag">QUI SOMMES-NOUS</span>
+      <h2>Votre partenaire de confiance depuis <span>plus de 10 ans</span></h2>
+      <p>
+        ROLYDOK CORPORATION est une entreprise multisectorielle spécialisée dans le commerce international,
+        la logistique, le tourisme, les services financiers et l'approvisionnement en produits divers.
+      </p>
+      <p>
+        Forts d'une expérience de plus d'une décennie, nous nous engageons à offrir à nos clients des
+        prestations de qualité, rapides et personnalisées, quel que soit le secteur d'activité.
+      </p>
+
+      <div class="chiffres-grid">
+        <div class="chiffre-item">
+          <div class="chiffre-num">8+</div>
+          <div class="chiffre-lbl">Domaines d'activité</div>
+        </div>
+        <div class="chiffre-item">
+          <div class="chiffre-num">500+</div>
+          <div class="chiffre-lbl">Clients satisfaits</div>
+        </div>
+        <div class="chiffre-item">
+          <div class="chiffre-num">10+</div>
+          <div class="chiffre-lbl">Années d'expérience</div>
+        </div>
+        <div class="chiffre-item">
+          <div class="chiffre-num">24/7</div>
+          <div class="chiffre-lbl">Disponibilité</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== FORMULAIRE ========== -->
+<section id="formulaire">
+  <div class="section-header">
+    <span class="section-tag">DEMANDE DE SERVICE</span>
+    <h2>Sollicitez une prestation</h2>
+    <p>Remplissez ce formulaire et nous vous recontacterons dans les plus brefs délais.</p>
+  </div>
+
+  <div class="form-wrapper">
+    <form id="demandeForm" onsubmit="sendForm(event)">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom complet *</label>
+          <input type="text" id="nom" placeholder="Votre nom" required />
+        </div>
+        <div class="form-group">
+          <label>Téléphone *</label>
+          <input type="tel" id="tel" placeholder="+971 52 188 0834" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Adresse email</label>
+        <input type="email" id="email" placeholder="votre@email.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Service souhaité *</label>
+        <select id="service" required>
+          <option value="">— Choisir un service —</option>
+          <option>Commerce général</option>
+          <option>Importation / Exportation</option>
+          <option>Logistique & Transport</option>
+          <option>Tourisme & Visa</option>
+          <option>Billetterie</option>
+          <option>Échange de devises</option>
+          <option>Services financiers</option>
+          <option>Système de paiement</option>
+          <option>Produits IT & Électronique</option>
+          <option>Approvisionnement divers</option>
+          <option>ROLYDOK China Business</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Description de votre besoin *</label>
+        <textarea id="message" placeholder="Décrivez votre besoin en détail..." required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">
+        📩 Envoyer ma demande via WhatsApp
+      </button>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <h4>✅ Message envoyé !</h4>
+      <p>Votre demande a été transmise. Nous vous répondrons dans les plus brefs délais.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-tag">NOUS CONTACTER</span>
+    <h2>Retrouvez-nous</h2>
+    <p>Notre équipe est disponible pour répondre à toutes vos questions.</p>
+  </div>
+
+  <div class="contact-inner">
+
+    <div class="contact-info">
+      <h3>Coordonnées</h3>
+
+      <div class="contact-row">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <strong>Téléphone</strong>
+          <a href="tel:+971521880834">+971 52 188 0834</a>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-icon" style="background:#25D366">💬</div>
+        <div class="contact-detail">
+          <strong>WhatsApp</strong>
+          <a href="https://wa.me/971521880834" target="_blank">+971 52 188 0834</a>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-icon" style="background:var(--orange)">✉️</div>
+        <div class="contact-detail">
+          <strong>Email</strong>
+          <a href="mailto:donneroland2@gmail.com">donneroland2@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <strong>Adresse</strong>
+          <span>Dubai, Émirats Arabes Unis</span>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-detail">
+          <strong>Horaires</strong>
+          <span>Lundi – Samedi : 8h – 18h</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="contact-map">
+        <div style="background:#1A3F72;color:#fff;font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;padding:6px 14px;">📍 DUBAI — SIÈGE PRINCIPAL</div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d231953.42065685783!2d55.07563235!3d25.076022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%2C%20%C3%89mirats%20arabes%20unis!5e0!3m2!1sfr!2sfr!4v1699000000001"
+          allowfullscreen="" loading="lazy" title="Dubai UAE"
+          style="width:100%;height:170px;border:none;display:block;">
+        </iframe>
+      </div>
+      <div class="contact-map">
+        <div style="background:#c0392b;color:#fff;font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;padding:6px 14px;">📍 SHANGHAI — ROLYDOK CHINA BUSINESS</div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3409501.1!2d121.4737!3d31.2304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35b27040b1f53c33%3A0x295129423c364a1!2sShanghai%2C%20Chine!5e0!3m2!1sfr!2sfr!4v1699000000002"
+          allowfullscreen="" loading="lazy" title="Shanghai Chine"
+          style="width:100%;height:170px;border:none;display:block;">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <p>© 2025 <strong>ROLYDOK CORPORATION</strong> — Tous droits réservés | Commerce · Logistique · Finance · Tourisme</p>
+</footer>
+
+<!-- ========== WHATSAPP FLOTTANT ========== -->
+<a href="https://wa.me/971521880834?text=Bonjour+ROLYDOK+Corporation,+j'aimerais+avoir+plus+d'informations"
+   class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  /* === Navigation mobile === */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  /* === Formulaire → WhatsApp === */
+  async function sendForm(e) {
+    e.preventDefault()
+    const btn     = document.querySelector('.form-submit')
+    const msgDiv  = document.getElementById('successMsg')
+    const nom     = document.getElementById('nom').value.trim()
+    const tel     = document.getElementById('tel').value.trim()
+    const email   = document.getElementById('email').value.trim()
+    const service = document.getElementById('service').value
+    const message = document.getElementById('message').value.trim()
+
+    if (!nom || !tel || !service || !message) {
+      alert('Veuillez remplir tous les champs obligatoires (*).')
+      return
+    }
+
+    btn.disabled = true
+    btn.textContent = '⏳ Envoi en cours...'
+    msgDiv.style.display = 'none'
+
+    const API_BASE = 'https://VOTRE-APP.up.railway.app'
+
+    try {
+      const response = await fetch(`${API_BASE}/api/demandes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom, telephone: tel, email: email || null, service, message })
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.message || 'Erreur')
+
+      document.getElementById('demandeForm').reset()
+      msgDiv.style.display = 'block'
+      msgDiv.innerHTML = `
+        <h4>✅ Demande enregistrée !</h4>
+        <p>Référence <strong>#${data.data.id}</strong> — Nous vous contacterons sous 24h au <strong>${tel}</strong>.</p>
+      `
+      setTimeout(() => { msgDiv.style.display = 'none' }, 8000)
+
+    } catch (err) {
+      // Fallback WhatsApp si API indisponible
+      const texte = encodeURIComponent(
+        `Bonjour ROLYDOK CORPORATION,
+
+Nom: ${nom}
+Tél: ${tel}
+Email: ${email || 'Non renseigné'}
+Service: ${service}
+
+Message: ${message}`
+      )
+      window.open(`https://wa.me/971521880834?text=${texte}`, '_blank')
+      msgDiv.style.display = 'block'
+      msgDiv.innerHTML = `
+        <h4>📱 Redirection WhatsApp</h4>
+        <p>Votre demande a été envoyée via WhatsApp.</p>
+      `
+    } finally {
+      btn.disabled = false
+      btn.innerHTML = '📩 Envoyer ma demande'
+    }
+  }
+  /* === Nav active au scroll === */
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 40) {
+      nav.style.background = '#0d2550';
+    } else {
+      nav.style.background = '#1A3F72';
+    }
+  });
+</script>
+
+</body>
+</html>
